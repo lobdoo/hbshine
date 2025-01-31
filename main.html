@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Playlist</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+            text-align: center;
+            color: white;
+            overflow-y: scroll; /* Allow scrolling */
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+        }
+        #visual {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            margin: 50px auto;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ff6b81;
+            text-align: center;
+            transition: transform 1s ease-in-out, background-color 1s ease-in-out;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .image {
+            display: none; /* Initially hidden */
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            margin: 20px auto;
+            border-radius: 15px;
+        }
+        .thank-you {
+            font-size: 2rem;
+            margin-top: 50px;
+            color: #ff6b81;
+            font-weight: bold;
+            opacity: 0;
+            display: none;
+        }
+        audio {
+            margin-bottom: 20px;
+            border: none;
+            background: none;
+        }
+        /* Add media queries for better responsiveness */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            #visual {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        #lastVideo {
+            display: none; /* Initially hidden */
+            width: 500px;
+            height: auto;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>For Шинэсар Шинэсар</h1>
+        <audio id="myAudio" controls>
+            <source src="Tsetse_-_04-VEED.mp3" type="audio/mpeg">
+        </audio>
+        <div id="visual">
+            Happy Birthday
+        </div>
+        <img id="image1" class="image" src="b771e4a6-24a9-4d70-9add-970614a0141f.jpeg" alt="Image at 12s">
+        <img id="image2" class="image" src="Gemini_Generated_Image_frbbh8frbbh8frbb.jpeg" alt="Image at 22s">
+        <img id="image3" class="image" src="1.webp" alt="Image at 31s">
+        <img id="image4" class="image" src="Gemini_Generated_Image_2hluhc2hluhc2hlu.jpeg" alt="Image at 36s">
+        <img id="image5" class="image" src="Gemini_Generated_Image_figozrfigozrfigo.jpeg" alt="Image at 47s">
+        <img id="image6" class="image" src="2.webp" alt="Image at 52s">
+        <img id="image7" class="image" src="Gemini_Generated_Image_y8qe9y8qe9y8qe9y.jpeg" alt="Image at 59s">
+        <img id="image8" class="image" src="Untitled design.png" alt="Image at 1m2s">
+        <img id="image9" class="image" src="Gemini_Generated_Image_e2hrwbe2hrwbe2hr.jpeg" alt="Image at 1m6s">
+        <img id="image10" class="image" src="0b46e03be00cada6dc139fda2c84cbc9febe20a509889d641892be4cbd507b23.png" alt="Image at 1m39s">
+        <img id="image11" class="image" src="ab0f04b614af912e5ce10848613c519b883f8b8cc4a0fd8e7a0ebb7da97d0905.png" alt="Image at 1m43s">
+        <img id="image12" class="image" src="DALL·E 2025-01-30 23.22.55 - A heartwarming animated-style illustration of a couple finally meeting after a long time apart. The scene is filled with joy and emotion, with warm li.webp" alt="Image at 1m47s">
+        <img id="image13" class="image" src="DALL·E 2025-01-30 23.25.08 - An animated-style illustration of a jealous man deep in thought. He has a serious and frustrated expression, his eyebrows furrowed as he looks off to .webp" alt="Image at 2m">
+        <img id="image14" class="image" src="Gemini_Generated_Image_c27p8mc27p8mc27p.jpeg" alt="Image at 2m18s">
+        
+        <!-- Last Video -->
+        <video id="lastVideo" class="image" muted>
+            <source src="RPReplay_Final1738311381.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="thank-you">Thank you for listening!</div>
+    </div>
+
+    <script>
+        const audio = document.getElementById("myAudio");
+        const images = document.querySelectorAll(".image");
+        const visual = document.getElementById("visual");
+        const thankYouMessage = document.querySelector(".thank-you");
+        const lastVideo = document.getElementById("lastVideo");
+
+        audio.addEventListener("timeupdate", () => {
+            const time = audio.currentTime;
+            const timings = [12, 22, 31, 36, 47, 52, 59, 62, 66, 99, 102, 106, 120, 138];
+            timings.forEach((t, index) => {
+                if (time >= t && time < t + 1) {
+                    images[index].style.display = "block";
+                    images[index].style.opacity = "1";  // Directly show the image
+                    images[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+
+            if (time >= 10 && time < 11) {
+                gsap.to(visual, { scale: 1.5, backgroundColor: "#ff6b81", duration: 1 });
+            }
+        });
+
+        // When the audio ends, show the video
+        audio.addEventListener("ended", () => {
+            // Hide all images and thank you message
+            images.forEach(image => image.style.display = "none");
+            thankYouMessage.style.display = "none";
+            
+            // Show the video and play it
+            lastVideo.style.display = "block";  // Make the video visible
+            lastVideo.play();  // Play the video automatically
+            lastVideo.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the video
+        });
+
+        // When the video ends, reset everything
+        lastVideo.addEventListener("ended", () => {
+            // Reset everything after the video ends
+            lastVideo.style.display = "none";  // Hide the video
+            lastVideo.pause();  // Pause the video
+            lastVideo.currentTime = 0;  // Reset the video to the beginning
+
+            // Restart the audio and show the first images again
+            audio.currentTime = 0;
+            audio.play();
+
+            images.forEach(image => image.style.display = "none");  // Hide images
+            thankYouMessage.style.display = "none";  // Hide "Thank You" message
+            gsap.to(visual, { scale: 1, backgroundColor: "white", duration: 1 });  // Reset the visual
+        });
+    </script>
+</body>
+</html>
